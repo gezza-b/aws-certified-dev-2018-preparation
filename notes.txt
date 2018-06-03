@@ -1,0 +1,56 @@
+Port numbers:
++ MS SQL: 1433
++ MySQL 3306
++ SSH: 22
++ HTTPS: 443
++ RDP: 3389
+
+DHCP Option Sets:
++ Dynamic Host Configuration Protocol (DHCP) provides a standard for passing configuration information to hosts on a TCP/IP network
++ DHCP options sets are associated with your AWS account so that you can use them across all of your VPCs
+
+AWS Limits
++ 5 Elastic IP addresses per region
++ Security Groups:
+  + Up to 50 inbound and 50 outbound rules for each SG
+  + Up to 5 SGs can be assigned to each network interface
+
+
+Establish a VPN connection
++ Establish VPG at VPC side
++ Establish CGW at customer side
++ Initiate traffic from CGW to VPG
++ If CGW support BGP than dynamic routing, otherwise static
+
+
+
+
+EC2:
++ Autoscaling
+  + CLI: aws autoscaling create-auto-scaling-group --auto-scaling-group-name myASG --launch-configuraiton-name myLC --availability-zones us-east-1a, us-east-1c --min-size 1 --max-size 10 --desired-capacity 3 --load-balancer-names myELB
+  + Auto-scaling plans: Maintain Current Instant Levels, Manual Scaling, Scheduled Scaling, Dynamic Scaling
++ ELB
+  + Provides a single CNAME entry point for DNS
+    + supports health checks - status: InService or OutOfService
+
+
+Policies - defines one or more permission; and each permission defines	
++ Effect: allow/deny
+  + Service: aws cloud service
+  + Resource: ARN (arn:aws:service:region:account-id:resourcetype:resource)
+  + Action: e.g. Read* 
+  + Condition (optional): e.g. IP address range; or time interval
+  + Example:
+    {
+      "Version": "2012-10-17",
+      "Statement": {
+        "Effect": "Allow",
+        "Action": "s3:ListBucket",
+        "Resource": "arn:aws:s3:::example_bucket"
+      }
+    }
+
+
+RDS
++ Supported DBs: MySQL, PostgreSQL, Oracle, Microsoft SQL, Maria DB, Aurora
++ API: CreateDBInstance, ModifyDBInstance, 
