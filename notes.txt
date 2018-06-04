@@ -1,9 +1,12 @@
 Port numbers:
 + MS SQL: 1433
-+ MySQL 3306
-+ SSH: 22
-+ HTTPS: 443
-+ RDP: 3389
++ MySQL:  3306
++ SSH:    22
++ HTTPS:  443
++ RDP:    3389
++ Telnet: 23
++ Postge: 5432
++ Oracle: 1521
 
 DHCP Option Sets:
 + Dynamic Host Configuration Protocol (DHCP) provides a standard for passing configuration information to hosts on a TCP/IP network
@@ -21,8 +24,6 @@ Establish a VPN connection
 + Establish CGW at customer side
 + Initiate traffic from CGW to VPG
 + If CGW support BGP than dynamic routing, otherwise static
-
-
 
 
 EC2:
@@ -53,4 +54,74 @@ Policies - defines one or more permission; and each permission defines
 
 RDS
 + Supported DBs: MySQL, PostgreSQL, Oracle, Microsoft SQL, Maria DB, Aurora
-+ API: CreateDBInstance, ModifyDBInstance, 
++ API: CreateDBInstance, ModifyDBInstance
++ DB Parameter Groups: manage features and common configurations
+    + Change of parameter group requires reboot
+    + Fail-over: DNS name unchanged, and CNAME points to standby
+    + Multi-AZ deployments are for DR only
+    + Performance: use read replicas
+    + Scaling out:
+        + Shards (partitioning or sharding --> DynamoDb or Cassandra);
+        + or use read relpicas -> asnynchronous
+
+DynamoDB metrics:
+  + CloudWatch metrics: 
+    + ConsumedReadCapacityUnits
+    + ConsumedWriteCapacityUnits
+    + ThrottledRequests 
+  + Write Items: 
+    + PutItem
+    + UpdateItem
+    + DeleteItem
+  + Read Iems: 
+    + GetItem
+    + BatchWriteItem (up 20 25 items)
+    + 
+
+SQS Operations:
++ CreateQueue
++ List Queue
++ DeleteQueue
++ SendMessage
++ ListDeadLetterSourceQueues
++ Long Polling: WaitTimeSeconds 
++ Limits:
+  + Maximum of 120,000 inflight messages per queue
+  + Maximum visibility timeout for a message is 12 hours; default is 30 seconds
+  + The minimum message size is 1 KB. The maximum is 256 KB
+
+SWF - Domains:
++ Domain
+  + Domains provide a way of scoping Amazon SWF resources within your AWS account.
+  + It is possible to have more than one workflow in a domain; however, workflows in different domains cannot interact with each other
++ Limits
+  + 100 domains
+  + Maximum open workflow executions – 100,000 per domain
+  + Maximum workflow execution time – 1 year
+  + Maximum request size – 1 MB per request
+  + Workflow retention time limit – 90 days
+
+SNS
++ Limits: 100,000 Topics
+
+Route53:
+  + SOA (Start of Authority Record): is mandatory in all zone file
+  + A Records is used to map a host to an IPv4 IP address
+  + AAAA records map a host to an IPv6 address
+  + MX (Mail Exchange): points to a host defined by an A or AAAA record 
+  + NS (Name server)
+    + used by TLD server to redirect traffic to the DNS server that contains the authorative DNS record
+  + PTR (pointer): reverse of an A record (maps IP to a DNS name)
+  + CNAME you cannot create a CNAME for a Zone Apex
+  + Alias: Difference to CNAME: they are not visible to resolvers. 
+      + Alias is recommended for S3 mapping
+  + SPF (Secondary Policy Framework): used by mail servers to combat spam
+  + Limits
+    + 50 Domains per account
+    + 50 Health checks
+    + 50 Traffic policies
+    + 100 hosted zones
+    + 10,000 resource record sets per hosted zone
+
+
+

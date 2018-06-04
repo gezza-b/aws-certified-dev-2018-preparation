@@ -1,0 +1,43 @@
+1st TEST SCENARIO - EC2 instance with public IP address:
+a) start one instance, stop it
+b) restart it and check ip addresses
+RESULT:
+kept private IP
+issued new public IP - 52.62.38.40 
+--------------------------------------------------------------
+2nd TEST SCENARIO - two EC2 instance with public IP addresses:
+a) launch instance, stop it; 
+b) start new instance; terminate it 
+c)re-start first instance.
+RESULTS:
+a) 
+public IP:  13.236.179.237
+private IP: 172.31.6.39
+b) 
+public IP:  13.211.203.155
+private IP: 172.31.13.112
+c)
+public IP:  52.65.179.0
+private IP: 172.31.6.39
+
+LESSON LEARNT: 
+a stopped instance does not keep it's IP instance after a restart
+--------------------------------------------------------------
+3rd TEST SCENARIO - EIP
+a) launch an EC2 instance 
+b) attach an EIP to it afterwards
+RESULTS:
+a) private IP: 10.0.1.17
+b) 
+CLI command: aws ec2 allocate-address --domain "vpc" --region ap-southeast-2
+EIP: 13.236.53.34 --> associate to instance
+Optional: Allow Elastic IP to be reassociated if already attached (currently - to a different instance)
+warning: If you associate an Elastic IP address with your instance, your current public IP address is released
+CLI command: aws ec2 associate-address --allocation-id "eipalloc-0ea7cfc2629eff1d7" --instance-id "i-0718b4bae74f8a3f4" --no-allow-reassociation --private-ip-address "10.0.1.17" --region ap-southeast-2
+--------------------------------------------------------------
+4th TEST SCENARIO - RE-ASSOCIATE EIP:
+a) start new instance in different VPC
+RESULT:
+EIP can be re-associated - even to an instance in a different VPC
+-> dont' forget to release your EIP - otherwise you will be charged
+--------------------------------------------------------------
