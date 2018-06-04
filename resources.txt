@@ -1,0 +1,12 @@
+https://aws.amazon.com/certification/certification-prep/
+STUDY TIP: Focus on the following whitepapers.
+
++ Overview of Amazon Web Services 
++ Architecting for the Cloud: AWS Best Practices 
++ How AWS Pricing Works 
++ Compare AWS Support Plans: https://aws.amazon.com/premiumsupport/compare-plans/
+-----------------
+
+https://aws.amazon.com/certification/certified-developer-associate/
++ https://d1.awsstatic.com/training-and-certification/docs-dev-associate/AWS_certified_developer_associate_examsample.pdf
+
